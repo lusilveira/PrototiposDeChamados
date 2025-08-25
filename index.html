@@ -1889,49 +1889,51 @@
         });
 
         function mostrarInterface() {
-            document.getElementById('login-container').style.display = 'none';
-            document.getElementById('main-container').style.display = 'block';
-            
-            // Atualizar informações do usuário
-            const iniciais = usuarioLogado.nome.split(' ')
-                .map(palavra => palavra[0])
-                .slice(0, 2)
-                .join('');
-            
-            document.getElementById('user-avatar').textContent = iniciais;
-            document.getElementById('user-name').textContent = usuarioLogado.nome;
-            document.getElementById('user-org').textContent = usuarioLogado.orgao;
-            document.getElementById('user-perfil').textContent = usuarioLogado.perfil.replace('_', ' ').toUpperCase();
-            
-            // Controle de acesso por perfil
-            if (usuarioLogado.perfil === 'divisao_esocial') {
-                // DIVISÃO ESOCIAL: Painel completo, vê todos os chamados
-                document.getElementById('admin-panel').style.display = 'block';
-                document.getElementById('user-section').style.display = 'none';
-                configurarPainelDivisao();
-            } else if (usuarioLogado.perfil === 'admin') {
-                // ADMIN: Dashboard + Gestão de usuários e órgãos
-                document.getElementById('admin-panel').style.display = 'block';
-                document.getElementById('user-section').style.display = 'none';
-                configurarPainelAdmin();
-            } else if (usuarioLogado.perfil === 'gestor') {
-                // GESTOR: Apenas gestão de usuários do próprio órgão
-                document.getElementById('admin-panel').style.display = 'block';
-                document.getElementById('user-section').style.display = 'none';
-                configurarPainelGestor();
-            } else if (['equipe_extracao', 'equipe_regularidade', 'equipe_rubricas'].includes(usuarioLogado.perfil)) {
-                // EQUIPES ESPECIALIZADAS: Veem seus chamados atribuídos + podem fazer solicitações
-                document.getElementById('admin-panel').style.display = 'block';
-                document.getElementById('user-section').style.display = 'block';
-                configurarPainelEquipeEspecializada();
-            } else {
-                // USUÁRIOS: Apenas solicitações
-                document.getElementById('admin-panel').style.display = 'none';
-                document.getElementById('user-section').style.display = 'block';
-            }
-            
-            atualizarContadores();
-        }
+    document.getElementById('login-container').style.display = 'none';
+    document.getElementById('main-container').style.display = 'block';
+    
+    // Atualizar informações do usuário
+    const iniciais = usuarioLogado.nome.split(' ')
+        .map(palavra => palavra[0])
+        .slice(0, 2)
+        .join('');
+    
+    document.getElementById('user-avatar').textContent = iniciais;
+    document.getElementById('user-name').textContent = usuarioLogado.nome;
+    document.getElementById('user-org').textContent = usuarioLogado.orgao;
+    document.getElementById('user-perfil').textContent = usuarioLogado.perfil.replace('_', ' ').toUpperCase();
+    
+    // ============= ALTERAÇÃO AQUI =============
+    // Controle de acesso por perfil
+    if (usuarioLogado.perfil === 'divisao_esocial') {
+        // DIVISÃO ESOCIAL: Painel completo, NÃO vê formulário de solicitações
+        document.getElementById('admin-panel').style.display = 'block';
+        document.getElementById('user-section').style.display = 'none'; // MUDANÇA: era 'none', continua 'none'
+        configurarPainelDivisao();
+    } else if (usuarioLogado.perfil === 'admin') {
+        // ADMIN: Dashboard + Gestão de usuários e órgãos, NÃO vê formulário de solicitações
+        document.getElementById('admin-panel').style.display = 'block';
+        document.getElementById('user-section').style.display = 'none'; // MUDANÇA: era 'none', continua 'none'
+        configurarPainelAdmin();
+    } else if (usuarioLogado.perfil === 'gestor') {
+        // GESTOR: Apenas gestão de usuários do próprio órgão
+        document.getElementById('admin-panel').style.display = 'block';
+        document.getElementById('user-section').style.display = 'none';
+        configurarPainelGestor();
+    } else if (['equipe_extracao', 'equipe_regularidade', 'equipe_rubricas'].includes(usuarioLogado.perfil)) {
+        // EQUIPES ESPECIALIZADAS: Veem apenas seus chamados atribuídos, NÃO fazem solicitações
+        document.getElementById('admin-panel').style.display = 'block';
+        document.getElementById('user-section').style.display = 'none'; // MUDANÇA PRINCIPAL: era 'block', agora 'none'
+        configurarPainelEquipeEspecializada();
+    } else {
+        // USUÁRIOS: Apenas solicitações
+        document.getElementById('admin-panel').style.display = 'none';
+        document.getElementById('user-section').style.display = 'block';
+    }
+    
+    atualizarContadores();
+}
+        
 
         function logout() {
             sessionStorage.removeItem('usuarioLogado');
