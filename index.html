@@ -1337,24 +1337,26 @@
 
                     <form id="solicitacao-form">
                         <div class="form-grid">
-                            <div class="form-group">
+                            <div class="form-group full-width">
                                 <label for="orgao-form">Órgão / Entidade / Unidade *</label>
-                                <input type="text" id="orgao-form" name="orgao" readonly style="background: #f3f4f6;">
+                                <select id="orgao-form" name="orgao" required style="background: #f3f4f6;" disabled>
+                                    <option value="">Selecione o órgão</option>
+                                </select>
                             </div>
 
                             <div class="form-group">
                                 <label for="nome-form">Nome *</label>
-                                <input type="text" id="nome-form" name="nome" readonly style="background: #f3f4f6;">
+                                <input type="text" id="nome-form" name="nome" readonly required style="background: #f3f4f6;">
                             </div>
 
                             <div class="form-group">
                                 <label for="email-form">E-mail *</label>
-                                <input type="email" id="email-form" name="email" readonly style="background: #f3f4f6;">
+                                <input type="email" id="email-form" name="email" readonly required style="background: #f3f4f6;">
                             </div>
 
-                            <div class="form-group">
-                                <label for="telefone">Telefone Celular</label>
-                                <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999">
+                            <div class="form-group full-width">
+                                <label for="telefone">Telefone Celular *</label>
+                                <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
                             </div>
 
                             <div class="form-group full-width">
@@ -1774,6 +1776,7 @@
                 solicitante: 'Julia da Silva Sponchiado',
                 orgao: 'Departamento Estadual de Trânsito - DETRAN',
                 email: 'julia.sponchiado@detran.sp.gov.br',
+                telefone: '(11) 94603-4257',
                 data: '22/08/2025',
                 status: 'pendente',
                 descricao: 'Solicitação de extração de dados de funcionários ativos no mês de janeiro de 2025, incluindo informações de admissão, demissão e alterações salariais para transmissão do eSocial.',
@@ -1786,6 +1789,7 @@
                 solicitante: 'Lidiane da Silva Calsolari Almeida',
                 orgao: 'Departamento de Estradas de Rodagem - DER',
                 email: 'lscalmeida@sp.gov.br',
+                telefone: '(11) 95041-7122',
                 data: '21/08/2025',
                 status: 'andamento',
                 descricao: 'Reenvio de arquivo de transmissão do evento S-2299 (Desligamento) que apresentou erro de validação durante o envio inicial ao eSocial.',
@@ -1798,6 +1802,7 @@
                 solicitante: 'Jéssica Silva de Oliveira',
                 orgao: 'Agência de Transporte do Estado de São Paulo - ARTESP',
                 email: 'jessica.oliveira@artesp.sp.gov.br',
+                telefone: '(11) 96358-2805',
                 data: '20/08/2025',
                 status: 'concluida',
                 descricao: 'Criação de nova rubrica salarial para adicional de insalubridade categoria 3, conforme acordo coletivo 2025.',
@@ -1810,6 +1815,7 @@
                 solicitante: 'Carla Daniela Pascoal Riciati',
                 orgao: 'Caixa Beneficiencia da Polícia Militar - CBPM',
                 email: 'carla@cbpm.sp.gov.br',
+                telefone: '(11) 94700-7405',
                 data: '19/08/2025',
                 status: 'aguardando',
                 descricao: 'Transmissão de dados de afastamento por licença médica para integração com sistema nacional de saúde e previdência.',
@@ -1822,6 +1828,7 @@
                 solicitante: 'Marcos Paulo Botelho Buch',
                 orgao: 'CENTRO ESTADUAL DE EDUCAÇÃO TECNOLÓGICA PAULA SOUZA - CEETEPS',
                 email: 'marcos.buch@cps.sp.gov.br',
+                telefone: '(11) 98595-9928',
                 data: '18/08/2025',
                 status: 'andamento',
                 descricao: 'Regularização de inconsistências nos eventos S-2200 (Cadastramento Inicial) identificadas no relatório de pendências do eSocial.',
@@ -1834,6 +1841,7 @@
                 solicitante: 'Lucia Freire de Almeida',
                 orgao: 'Departamento Estadual de Trânsito - DETRAN',
                 email: 'lucia.almeida@detran.sp.gov.br',
+                telefone: '(11) 99125-1772',
                 data: '17/08/2025',
                 status: 'pendente',
                 descricao: 'Extração de relatório de folha de pagamento consolidada do exercício 2024 para auditoria interna.',
@@ -1845,6 +1853,7 @@
         let usuarioLogado = null;
         let editandoUsuario = null;
         let editandoOrgao = null;
+        let tipoSelecionado = null;
 
         // Verificar se há usuário logado ao carregar a página
         window.addEventListener('DOMContentLoaded', function() {
@@ -2351,6 +2360,7 @@
                     <p><strong>Tipo:</strong> ${solicitacao.tipo}</p>
                     <p><strong>Solicitante:</strong> ${solicitacao.solicitante}</p>
                     <p><strong>E-mail:</strong> ${solicitacao.email}</p>
+                    <p><strong>Telefone:</strong> ${solicitacao.telefone || 'Não informado'}</p>
                     <p><strong>Órgão:</strong> ${solicitacao.orgao}</p>
                     <p><strong>Data:</strong> ${solicitacao.data}</p>
                     <p><strong>Status:</strong> <span class="solicitacao-status status-${solicitacao.status}">${solicitacao.status.charAt(0).toUpperCase() + solicitacao.status.slice(1)}</span></p>
@@ -2602,6 +2612,7 @@
                     <p><strong>Tipo:</strong> ${solicitacao.tipo}</p>
                     <p><strong>Solicitante:</strong> ${solicitacao.solicitante}</p>
                     <p><strong>E-mail:</strong> ${solicitacao.email}</p>
+                    <p><strong>Telefone:</strong> ${solicitacao.telefone || 'Não informado'}</p>
                     <p><strong>Órgão:</strong> ${solicitacao.orgao}</p>
                     <p><strong>Data:</strong> ${solicitacao.data}</p>
                     <p><strong>Status:</strong> <span class="solicitacao-status status-${solicitacao.status}">${solicitacao.status.charAt(0).toUpperCase() + solicitacao.status.slice(1)}</span></p>
@@ -2896,40 +2907,8 @@
 
         // FUNÇÕES PARA CRIAÇÃO DE SOLICITAÇÕES
         function criarSolicitacao(tipo) {
-            // Simular criação de nova solicitação
-            const tipos = {
-                'extracao': 'Extração',
-                'reenvio': 'Reenvio',
-                'criar-rubrica': 'Rubrica',
-                'transmissao': 'Transmissão'
-            };
-
-            const novaId = `SOL-2025-${String(solicitacoes.length + 1).padStart(3, '0')}`;
-            const agora = new Date();
-            const dataFormatada = `${String(agora.getDate()).padStart(2, '0')}/${String(agora.getMonth() + 1).padStart(2, '0')}/${agora.getFullYear()}`;
-
-            const novaSolicitacao = {
-                id: novaId,
-                tipo: tipos[tipo],
-                solicitante: usuarioLogado.nome,
-                orgao: usuarioLogado.orgao,
-                email: usuarioLogado.email,
-                data: dataFormatada,
-                status: 'pendente',
-                descricao: `Nova solicitação de ${tipos[tipo].toLowerCase()} criada pelo usuário ${usuarioLogado.nome}. Aguardando detalhamento e análise da equipe técnica.`,
-                observacoes: 'Aguardando atribuição para técnico da divisão.',
-                responsavel: null
-            };
-
-            solicitacoes.unshift(novaSolicitacao);
-            
-            // Mostrar mensagem de sucesso
-            document.getElementById('success-message').style.display = 'block';
-            document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
-            
-            setTimeout(() => {
-                document.getElementById('success-message').style.display = 'none';
-            }, 5000);
+            // Mostrar formulário em vez de criar automaticamente
+            abrirFormulario(tipo);
         }
 
         // Funções do formulário de solicitação (para usuários e equipes que fazem solicitações)
@@ -2946,7 +2925,35 @@
             };
             
             document.getElementById('service-type-title').textContent = titles[tipo];
+            
+            // Preencher dados do usuário logado
+            preencherDadosUsuario();
+            
             window.scrollTo(0, 0);
+        }
+
+        function preencherDadosUsuario() {
+            // Preencher dropdown de órgãos
+            const orgaoSelect = document.getElementById('orgao-form');
+            orgaoSelect.innerHTML = '<option value="">Selecione o órgão</option>';
+            orgaos.forEach(orgao => {
+                orgaoSelect.innerHTML += `<option value="${orgao.nome}">${orgao.nome}</option>`;
+            });
+            
+            // Selecionar o órgão do usuário logado
+            orgaoSelect.value = usuarioLogado.orgao;
+            
+            // Preencher outros campos com dados do usuário logado
+            document.getElementById('nome-form').value = usuarioLogado.nome;
+            document.getElementById('email-form').value = usuarioLogado.email;
+            document.getElementById('telefone').value = usuarioLogado.telefone || '';
+            
+            // Limpar descrição e atualizar contador
+            document.getElementById('descricao').value = '';
+            updateCharCounter();
+            
+            // Atualizar estado do botão de envio
+            updateSubmitButton();
         }
 
         // Contador de caracteres e validação
@@ -2971,21 +2978,24 @@
         function updateSubmitButton() {
             const form = document.getElementById('solicitacao-form');
             const btnEnviar = document.getElementById('btn-enviar');
+            const orgaoField = document.getElementById('orgao-form');
+            const nomeField = document.getElementById('nome-form');
+            const emailField = document.getElementById('email-form');
+            const telefoneField = document.getElementById('telefone');
             const descricaoField = document.getElementById('descricao');
             
-            if (form && btnEnviar && descricaoField) {
-                const descricao = descricaoField.value;
-                
-                const requiredFields = form.querySelectorAll('[required]');
+            if (form && btnEnviar && orgaoField && nomeField && emailField && telefoneField && descricaoField) {
                 let allValid = true;
                 
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
-                        allValid = false;
-                    }
-                });
+                // Verificar campos obrigatórios
+                if (!orgaoField.value.trim()) allValid = false;
+                if (!nomeField.value.trim()) allValid = false;
+                if (!emailField.value.trim()) allValid = false;
+                if (!telefoneField.value.trim()) allValid = false;
+                if (!descricaoField.value.trim()) allValid = false;
                 
-                if (descricao.length < 120) {
+                // Verificar comprimento mínimo da descrição
+                if (descricaoField.value.length < 120) {
                     allValid = false;
                 }
                 
@@ -2999,10 +3009,14 @@
             if (descricaoField) {
                 descricaoField.addEventListener('input', updateCharCounter);
                 
-                // Adicionar listeners para validação
-                document.querySelectorAll('[required]').forEach(field => {
-                    field.addEventListener('input', updateSubmitButton);
-                    field.addEventListener('change', updateSubmitButton);
+                // Adicionar listeners para validação em todos os campos obrigatórios
+                const campos = ['orgao-form', 'nome-form', 'email-form', 'telefone', 'descricao'];
+                campos.forEach(campoId => {
+                    const campo = document.getElementById(campoId);
+                    if (campo) {
+                        campo.addEventListener('input', updateSubmitButton);
+                        campo.addEventListener('change', updateSubmitButton);
+                    }
                 });
                 
                 // Inicializar contador
@@ -3015,13 +3029,60 @@
                 formSolicitacao.addEventListener('submit', function(e) {
                     e.preventDefault();
                     
-                    const successMessage = document.getElementById('success-message');
-                    successMessage.style.display = 'block';
+                    // Obter dados do formulário
+                    const orgaoSelecionado = document.getElementById('orgao-form').value;
+                    const nome = document.getElementById('nome-form').value;
+                    const email = document.getElementById('email-form').value;
+                    const telefone = document.getElementById('telefone').value;
+                    const descricao = document.getElementById('descricao').value;
                     
-                    document.getElementById('form-container').scrollIntoView({ behavior: 'smooth' });
+                    // Validar campos obrigatórios
+                    if (!orgaoSelecionado || !nome || !email || !telefone || !descricao) {
+                        alert('Por favor, preencha todos os campos obrigatórios.');
+                        return;
+                    }
+                    
+                    if (descricao.length < 120) {
+                        alert('A descrição deve ter pelo menos 120 caracteres.');
+                        return;
+                    }
+                    
+                    // Criar nova solicitação
+                    const tipoSolicitacao = document.getElementById('service-type-title').textContent;
+                    const novaId = `SOL-2025-${String(solicitacoes.length + 1).padStart(3, '0')}`;
+                    const agora = new Date();
+                    const dataFormatada = `${String(agora.getDate()).padStart(2, '0')}/${String(agora.getMonth() + 1).padStart(2, '0')}/${agora.getFullYear()}`;
+
+                    const novaSolicitacao = {
+                        id: novaId,
+                        tipo: tipoSolicitacao,
+                        solicitante: nome,
+                        orgao: orgaoSelecionado,
+                        email: email,
+                        telefone: telefone,
+                        data: dataFormatada,
+                        status: 'pendente',
+                        descricao: descricao,
+                        observacoes: 'Aguardando atribuição para equipe especializada.',
+                        responsavel: null
+                    };
+
+                    solicitacoes.unshift(novaSolicitacao);
+                    
+                    // Mostrar mensagem de sucesso
+                    const successMessage = document.getElementById('success-message-form');
+                    successMessage.style.display = 'block';
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Limpar formulário
+                    document.getElementById('descricao').value = '';
+                    document.getElementById('anexos').value = '';
+                    document.getElementById('file-list').innerHTML = '';
+                    updateCharCounter();
                     
                     setTimeout(() => {
                         voltarHome();
+                        successMessage.style.display = 'none';
                     }, 5000);
                 });
             }
@@ -3079,6 +3140,13 @@
             document.getElementById('form-container').style.display = 'none';
             document.getElementById('services-grid').style.display = 'grid';
             document.getElementById('success-message').style.display = 'none';
+            document.getElementById('success-message-form').style.display = 'none';
+            
+            // Limpar formulário
+            document.getElementById('solicitacao-form').reset();
+            document.getElementById('file-list').innerHTML = '';
+            tipoSelecionado = null;
+            updateCharCounter();
         }
     </script>
 </body>
