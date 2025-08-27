@@ -33,8 +33,12 @@ function configurarPainelAdmin() {
     });
     
     // Configurar títulos
-    document.getElementById('admin-title').textContent = '🏛️ Administração Geral';
+    document.getElementById('admin-title').textContent = '🛡️ Administração Geral';
     document.getElementById('admin-subtitle').textContent = 'Gestão de usuários e órgãos do sistema';
+    
+    // Mostrar apenas cards do admin
+    document.querySelectorAll('.stat-card').forEach(card => card.style.display = 'none');
+    document.querySelectorAll('.admin-only').forEach(card => card.style.display = 'block');
     
     // Carregar dados
     carregarTabelaUsuarios();

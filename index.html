@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal de Solicitações - Governo do Estado de São Paulo</title>
-    
+
     <!-- CSS Files -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/login.css">
@@ -13,6 +14,7 @@
     <link rel="stylesheet" href="css/modals.css">
     <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
     <!-- Tela de Login -->
     <div id="login-container" class="login-container">
@@ -30,7 +32,8 @@
             <form id="login-form" class="login-form">
                 <div class="form-group">
                     <label for="usuario">CPF ou Usuário</label>
-                    <input type="text" id="usuario" name="usuario" required placeholder="Digite seu CPF (apenas números) ou usuário">
+                    <input type="text" id="usuario" name="usuario" required
+                        placeholder="Digite seu CPF (apenas números) ou usuário">
                 </div>
 
                 <div class="form-group">
@@ -72,7 +75,8 @@
                         <strong>🚌 ARTESP (Jéssica):</strong> 38097886863 / 123456 (Fazer Solicitações)
                     </div>
                     <!-- CRÉDITOS: -->
-                    <div style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e5e7eb; text-align: center;">
+                    <div
+                        style="margin-top: 20px; padding-top: 15px; border-top: 1px solid #e5e7eb; text-align: center;">
                         <small style="color: #6b7280; font-size: 0.75rem;">
                             Desenvolvido por: Egliane da Costa Santos Silva e Luciana Silveira<br>
                             Equipe RH Estruturante
@@ -98,7 +102,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="header-title">
                     <h1>Portal eSocial - Solicitações</h1>
                     <p>O seu canal de comunicação com a Equipe do eSocial</p>
@@ -131,27 +135,54 @@
 
                 <div class="admin-content">
                     <!-- DASHBOARD -->
+                    <!-- DASHBOARD -->
                     <div id="admin-dashboard" class="admin-dashboard">
                         <div class="admin-stats">
-                            <div class="stat-card" onclick="mostrarAbaAdmin('solicitacoes')">
+                            <!-- Cards para Admin -->
+                            <div class="stat-card admin-only" onclick="mostrarAbaAdmin('usuarios')"
+                                style="display: none;">
+                                <div class="stat-icon">👥</div>
+                                <div class="stat-number" id="total-usuarios-admin">127</div>
+                                <div class="stat-label">Total de Usuários</div>
+                            </div>
+                            <div class="stat-card admin-only" onclick="mostrarAbaAdmin('orgaos')"
+                                style="display: none;">
+                                <div class="stat-icon">🏢</div>
+                                <div class="stat-number" id="total-orgaos-admin">23</div>
+                                <div class="stat-label">Órgãos Conectados</div>
+                            </div>
+
+                            <!-- Cards para Divisão eSocial -->
+                            <div class="stat-card divisao-only" onclick="mostrarAbaAdmin('solicitacoes')"
+                                style="display: none;">
                                 <div class="stat-icon">📋</div>
                                 <div class="stat-number" id="total-solicitacoes">47</div>
                                 <div class="stat-label">Chamados Abertos</div>
                             </div>
-                            <div class="stat-card" onclick="mostrarAbaAdmin('usuarios')">
+                            <div class="stat-card divisao-only" onclick="mostrarAbaAdmin('usuarios')"
+                                style="display: none;">
                                 <div class="stat-icon">👥</div>
                                 <div class="stat-number" id="total-usuarios">127</div>
                                 <div class="stat-label">Total de Usuários</div>
                             </div>
-                            <div class="stat-card" onclick="mostrarAbaAdmin('orgaos')">
+                            <div class="stat-card divisao-only" onclick="mostrarAbaAdmin('orgaos')"
+                                style="display: none;">
                                 <div class="stat-icon">🏢</div>
                                 <div class="stat-number" id="total-orgaos">23</div>
                                 <div class="stat-label">Órgãos Conectados</div>
                             </div>
-                            <div class="stat-card">
+                            <div class="stat-card divisao-only" style="display: none;">
                                 <div class="stat-icon">✅</div>
                                 <div class="stat-number">95%</div>
                                 <div class="stat-label">Taxa de Resolução</div>
+                            </div>
+
+                            <!-- Cards para Gestor -->
+                            <div class="stat-card gestor-only" onclick="mostrarAbaAdmin('usuarios')"
+                                style="display: none;">
+                                <div class="stat-icon">👥</div>
+                                <div class="stat-number" id="total-usuarios-gestor">5</div>
+                                <div class="stat-label">Usuários do Órgão</div>
                             </div>
                         </div>
                     </div>
@@ -198,7 +229,7 @@
                     <!-- GESTÃO DE USUÁRIOS -->
                     <div id="admin-usuarios" class="user-management">
                         <button class="btn-novo-usuario" onclick="abrirModalUsuario()">➕ Cadastrar Novo Usuário</button>
-                        
+
                         <div class="users-table">
                             <table>
                                 <thead>
@@ -220,9 +251,10 @@
                     <!-- GESTÃO DE ÓRGÃOS -->
                     <div id="admin-orgaos" class="orgaos-management">
                         <button class="btn-novo-orgao" onclick="abrirModalOrgao()">➕ Cadastrar Novo Órgão</button>
-                        
+
                         <div class="users-table">
-                            <h4 style="margin-bottom: 20px; color: rgba(255,255,255,0.9);">📋 Lista de Órgãos Cadastrados</h4>
+                            <h4 style="margin-bottom: 20px; color: rgba(255,255,255,0.9);">📋 Lista de Órgãos
+                                Cadastrados</h4>
                             <table>
                                 <thead>
                                     <tr>
@@ -245,8 +277,11 @@
             <div id="user-section">
                 <div class="intro-section">
                     <h2 id="intro-title">Portal eSocial - Solicitações</h2>
-                    <p id="intro-description"><strong>Aqui você pode fazer solicitações relacionadas ao eSocial, incluindo extrações de dados, reenvios, solicitar Rubrica, transmissões ou alterações de informações no sistema.</strong></p>
-                    <p>Este portal foi desenvolvido para facilitar a comunicação entre os órgãos e a equipe responsável pelo eSocial no Estado de São Paulo.</p>
+                    <p id="intro-description"><strong>Aqui você pode fazer solicitações relacionadas ao eSocial,
+                            incluindo extrações de dados, reenvios, solicitar Rubrica, transmissões ou alterações de
+                            informações no sistema.</strong></p>
+                    <p>Este portal foi desenvolvido para facilitar a comunicação entre os órgãos e a equipe responsável
+                        pelo eSocial no Estado de São Paulo.</p>
                 </div>
 
                 <div class="services-grid" id="services-grid">
@@ -284,13 +319,14 @@
                 </div>
 
                 <div class="success-message" id="success-message">
-                    <strong>Sucesso!</strong> Sua solicitação foi enviada com sucesso. Em breve você receberá um retorno por e-mail.
+                    <strong>Sucesso!</strong> Sua solicitação foi enviada com sucesso. Em breve você receberá um retorno
+                    por e-mail.
                 </div>
 
                 <!-- Formulário de solicitação -->
                 <div id="form-container" class="form-container" style="display: none;">
                     <button class="btn-voltar" onclick="voltarHome()">← Voltar</button>
-                    
+
                     <div class="form-header">
                         <div class="service-type" id="service-type-title">Tipo de Solicitação</div>
                         <h2>Nova Solicitação</h2>
@@ -298,7 +334,8 @@
                     </div>
 
                     <div class="success-message" id="success-message-form" style="display: none;">
-                        <strong>Sucesso!</strong> Sua solicitação foi enviada com sucesso. Em breve você receberá um retorno por e-mail.
+                        <strong>Sucesso!</strong> Sua solicitação foi enviada com sucesso. Em breve você receberá um
+                        retorno por e-mail.
                     </div>
 
                     <form id="solicitacao-form">
@@ -312,12 +349,14 @@
 
                             <div class="form-group">
                                 <label for="nome-form">Nome *</label>
-                                <input type="text" id="nome-form" name="nome" readonly required style="background: #f3f4f6;">
+                                <input type="text" id="nome-form" name="nome" readonly required
+                                    style="background: #f3f4f6;">
                             </div>
 
                             <div class="form-group">
                                 <label for="email-form">E-mail *</label>
-                                <input type="email" id="email-form" name="email" readonly required style="background: #f3f4f6;">
+                                <input type="email" id="email-form" name="email" readonly required
+                                    style="background: #f3f4f6;">
                             </div>
 
                             <div class="form-group full-width">
@@ -327,14 +366,17 @@
 
                             <div class="form-group full-width">
                                 <label for="descricao">Descrição *</label>
-                                <textarea id="descricao" name="descricao" placeholder="Descreva detalhadamente sua solicitação, incluindo informações relevantes para o processamento..." required minlength="120" maxlength="10000"></textarea>
+                                <textarea id="descricao" name="descricao"
+                                    placeholder="Descreva detalhadamente sua solicitação, incluindo informações relevantes para o processamento..."
+                                    required minlength="120" maxlength="10000"></textarea>
                                 <div class="char-counter" id="char-counter">0 / 10000 caracteres (mínimo: 120)</div>
                             </div>
 
                             <div class="form-group full-width">
                                 <label>Anexos</label>
                                 <div class="file-upload">
-                                    <input type="file" id="anexos" name="anexos" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt">
+                                    <input type="file" id="anexos" name="anexos" multiple
+                                        accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.txt">
                                     <label for="anexos">
                                         📎 Clique aqui para selecionar arquivos<br>
                                         <small>Formatos aceitos: PDF, DOC, DOCX, JPG, PNG, TXT</small>
@@ -354,8 +396,10 @@
 
         <!-- Footer -->
         <div class="footer">
-            <p>Portal eSocial - Governo do Estado de São Paulo | V 1.4.0.502 - © Copyright 2025 - Prodesp - Companhia de Processamento de Dados do Estado de São Paulo | Todos os direitos reservados</p>
-            <p style="margin-top: 10px; font-size: 0.9rem; color: #9ca3af;">Desenvolvido por: Egliane da Costa Santos Silva e Luciana Silveira - Equipe RH Estruturante</p>
+            <p>Portal eSocial - Governo do Estado de São Paulo | V 1.4.0.502 - © Copyright 2025 - Prodesp - Companhia de
+                Processamento de Dados do Estado de São Paulo | Todos os direitos reservados</p>
+            <p style="margin-top: 10px; font-size: 0.9rem; color: #9ca3af;">Desenvolvido por: Egliane da Costa Santos
+                Silva e Luciana Silveira - Equipe RH Estruturante</p>
         </div>
     </div>
 
@@ -435,7 +479,8 @@
                         </div>
                         <div class="form-group full-width">
                             <label for="modal-orgao-descricao">Descrição</label>
-                            <textarea id="modal-orgao-descricao" placeholder="Descrição adicional do órgão (opcional)" rows="3"></textarea>
+                            <textarea id="modal-orgao-descricao" placeholder="Descrição adicional do órgão (opcional)"
+                                rows="3"></textarea>
                         </div>
                     </div>
                     <button type="submit" class="btn-primary">Salvar Órgão</button>
@@ -465,4 +510,5 @@
     <script src="js/utils.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
